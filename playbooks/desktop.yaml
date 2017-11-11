@@ -3,6 +3,10 @@
   hosts: localhost
   become: true
   tasks:
+    - name: install gVim
+      apt:
+        name: vim-gnome
+        state: present
     - name: install git
       apt:
         name: git
@@ -15,8 +19,8 @@
       apt:
         name: python3
         state: present
-    - name: Download node.js 
-      get_url:
-        name: python3
+    - name: Install ag
+      apt:
+        name: silversearcher-ag
         state: present
 

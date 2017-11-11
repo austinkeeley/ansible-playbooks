@@ -1,4 +1,5 @@
 #!/bin/bash
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-ansible-playbook node.yaml -l localhost
-rm *.retry
+ansible-playbook "$DIR/../playbooks/desktop.yaml" -l localhost
+rm -f *.retry
