@@ -1,0 +1,6 @@
+---
+- name: Install common dev tools
+  hosts: localhost
+  roles:
+    - dev
+  become: true
