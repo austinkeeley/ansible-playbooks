@@ -1,0 +1,22 @@
+---
+- name: Install common dev tools
+  hosts: localhost
+  become: true
+  tasks:
+    - name: install git
+      apt:
+        name: git
+        state: present
+    - name: install fish
+      apt:
+        name: fish
+        state: present
+    - name: install Python 3
+      apt:
+        name: python3
+        state: present
+    - name: Download node.js 
+      get_url:
+        name: python3
+        state: present
+

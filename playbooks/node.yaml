@@ -1,0 +1,29 @@
+---
+- hosts: localhost
+  tasks:
+    - name: Download node.js 
+      get_url:
+        url: https://nodejs.org/dist/v8.9.1/node-v8.9.1.tar.gz
+        dest: /tmp/node-v8.9.1.tar.gz
+        force: no
+        checksum: md5:7482b2523f72000d1b6060c38945026b
+    - name: delete any previous artifacts
+      file:
+        path: /tmp/node
+        state: absent
+    - name: create /tmp/node
+      file: 
+        path: /tmp/node
+        state: directory
+    - name: unpack node tarball
+      unarchive:
+        src: /tmp/node-v8.9.1.tar.gz
+        dest: /tmp/node
+    - name: configure node.js build
+      command: ./configure
+      args:
+        chdir: /tmp/node/node-v8.9.1
+    - name: make node.js
+      command: make
+      args:
+        chdir: /tmp/node/node-v8.9.1
