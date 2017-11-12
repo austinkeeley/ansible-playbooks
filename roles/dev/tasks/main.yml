@@ -1,2 +1,4 @@
 - name: Common dev tools
-  import_tasks: tools.yaml
+  import_tasks: tools.yml
+- name: Node.js
+  import_tasks: node.yml

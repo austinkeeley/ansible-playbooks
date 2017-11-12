@@ -1,0 +1,45 @@
+- name: Be sure we have gcc, make, etc.
+  apt:
+    name: build-essential
+    state: present
+- name: Be sure we have python2
+  apt:
+    name: python
+    state: present
+- name: Download node.js 
+  get_url:
+    url: https://nodejs.org/dist/{{node_version}}/node-{{node_version}}.tar.gz
+    dest: /tmp/node-{{node_version}}.tar.gz
+    force: no
+    checksum: md5:{{md5_sum}}
+- name: delete any previous artifacts
+  file:
+    path: /tmp/node
+    state: absent
+- name: create /tmp/node
+  file: 
+    path: /tmp/node
+    state: directory
+- name: unpack node tarball
+  unarchive:
+    src: /tmp/node-{{node_version}}.tar.gz
+    dest: /tmp/node
+- name: configure node.js build
+  command: ./configure
+  args:
+    chdir: /tmp/node/node-{{node_version}}
+- name: make node.js
+  command: make -j 10
+  args:
+    chdir: /tmp/node/node-{{node_version}}
+- name: install node.js
+  command: make install
+  become: true
+  args:
+    chdir: /tmp/node/node-{{node_version}}
+- name: create local npm global directory
+  file:
+    path: ~/.npm-global
+    state: directory
+- name: configure npm to use .npm-global directory
+  command: npm config set prefix $HOME/.npm-global
