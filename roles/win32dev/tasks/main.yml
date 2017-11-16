@@ -1,0 +1,8 @@
+# Provides i686-w64-mingw32-gcc and x86_64-w64-mingw32-gcc
+# and the C++ versions.
+
+- name: install mingw
+  apt:
+    name: mingw-w64
+    state: present
+

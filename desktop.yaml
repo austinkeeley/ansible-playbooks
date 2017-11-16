@@ -3,4 +3,5 @@
   hosts: localhost
   roles:
     - dev
+    - win32dev
   become: true
