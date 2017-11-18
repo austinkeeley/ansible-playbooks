@@ -22,3 +22,7 @@
   apt:
     name: silversearcher-ag
     state: present
+- name: Install bvi
+  apt:
+    name: bvi
+    state: present
